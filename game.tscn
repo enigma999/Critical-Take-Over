@@ -5,16 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://clex4vyjuy3py" path="res://scenes/characters/player.tscn" id="3_ywkr7"]
 [ext_resource type="PackedScene" uid="uid://bcj7wv5s7lqvk" path="res://scenes/characters/enemy.tscn" id="4_0pygn"]
 
-[node name="game" type="Node"]
+[node name="Game" type="Node"]
 
 [node name="UI" parent="." instance=ExtResource("1_l1k2k")]
 
-[node name="world" type="Node3D" parent="."]
+[node name="World" type="Node3D" parent="."]
 
-[node name="level" parent="world" instance=ExtResource("1_ovxki")]
+[node name="Level" parent="World" instance=ExtResource("1_ovxki")]
 
-[node name="characters" type="Node3D" parent="."]
+[node name="Characters" type="Node3D" parent="."]
 
-[node name="Player" parent="characters" instance=ExtResource("3_ywkr7")]
+[node name="Player" parent="Characters" instance=ExtResource("3_ywkr7")]
 
-[node name="Enemy" parent="characters" instance=ExtResource("4_0pygn")]
+[node name="Enemy" parent="Characters" instance=ExtResource("4_0pygn")]
