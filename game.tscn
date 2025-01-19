@@ -1,15 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://btg0t21c6pq3t"]
+[gd_scene load_steps=5 format=3 uid="uid://btg0t21c6pq3t"]
 
+[ext_resource type="PackedScene" uid="uid://ryqfpwfl7coq" path="res://scenes/ui/ui.tscn" id="1_l1k2k"]
 [ext_resource type="PackedScene" uid="uid://bil6dg3lnhtda" path="res://level.tscn" id="1_ovxki"]
+[ext_resource type="PackedScene" uid="uid://clex4vyjuy3py" path="res://scenes/characters/player.tscn" id="3_ywkr7"]
+[ext_resource type="PackedScene" uid="uid://bcj7wv5s7lqvk" path="res://scenes/characters/enemy.tscn" id="4_0pygn"]
 
 [node name="game" type="Node"]
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="UI" parent="." instance=ExtResource("1_l1k2k")]
 
 [node name="world" type="Node3D" parent="."]
 
 [node name="level" parent="world" instance=ExtResource("1_ovxki")]
+
+[node name="characters" type="Node3D" parent="."]
+
+[node name="Player" parent="characters" instance=ExtResource("3_ywkr7")]
+
+[node name="Enemy" parent="characters" instance=ExtResource("4_0pygn")]
