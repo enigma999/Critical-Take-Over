@@ -1,7 +1,7 @@
 extends Node
 
 @onready var UI = $UI
-
+var bleedStep: float = 1
 var bleedValue: float
 var bleedMax: float = 100
 
@@ -12,7 +12,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	bleedValue = bleedValue - (1 * delta);
+	bleedValue = bleedValue - (bleedStep * delta);
 	pass
 	
 func _process(delta: float) -> void:
