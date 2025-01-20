@@ -1,11 +1,12 @@
 extends CharacterBody3D
 
-
+#movement consts
 const SPEED: float = 8.0
 const ACCELERATION: float = 12.0
 const JUMP_VELOCITY: float = 4.5
 const GRAVITY_FORCE: float = 10.0
 
+#movement variables
 #puur @export toegevoegd voor het tweaken enzo
 @export var current_speed: float = SPEED
 @export var acceleration: float = ACCELERATION
@@ -15,10 +16,22 @@ const GRAVITY_FORCE: float = 10.0
 @export var maximum_angle:float = 90
 
 @onready var head = $Head
-
 var look_rotation: Vector2
 
+#shooting variables
+@onready var camera = $Head/Camera3D
+var can_shoot: bool = true
+var ray_range: float = 2000.0
+@onready var muzzle = $"Weapon/Muzzle/Bullet origin"
+
+
+
+
 func _physics_process(delta: float) -> void:
+	
+	#shooting stuff will seperate into functions later :D
+
+		
 	gravity(delta)
 	handle_movement(delta)
 	move_and_slide()
@@ -46,7 +59,26 @@ func set_camera_direction()-> void:
 	head.rotation_degrees.x = look_rotation.x
 	rotation_degrees.y = look_rotation.y
 
+func shoot()-> void:
+	var space_state = camera.get_world_3d().direct_space_state
+	var screen_center = get_viewport().size / 2
+	var origin = camera.project_ray_origin(screen_center)
+	var end_point = origin + camera.project_ray_normal(screen_center) * ray_range
+	var query = PhysicsRayQueryParameters3D.create(origin, end_point)
+	query.collide_with_bodies = true
+	var targetDict: Dictionary = space_state.intersect_ray(query)
+	var target:Node3D = targetDict.get("collider")
+	if target != null:
+		print(target.is_in_group("enemy"))
+	else:
+		print ("yabadabadoo")
 func _input(event):
+	
+	#shooting input
+	if Input.is_action_just_pressed("shoot") && can_shoot:
+		shoot()
+		
+	#looking around
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	elif event.is_action_pressed("ui_cancel"):
