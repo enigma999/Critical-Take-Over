@@ -14,6 +14,7 @@
 [node name="Level" parent="World" instance=ExtResource("1_ovxki")]
 
 [node name="Characters" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 
 [node name="Player" parent="Characters" instance=ExtResource("3_ywkr7")]
 
