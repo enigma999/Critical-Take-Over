@@ -22,8 +22,8 @@ var look_rotation: Vector2
 @onready var camera = $Head/Camera3D
 var can_shoot: bool = true
 var ray_range: float = 2000.0
-@onready var muzzle = $"Weapon/Muzzle/Bullet origin"
-
+@onready var weapon: Node3D = $Weapon
+@onready var attack_cooldown: Timer = $WeaponCooldown
 
 
 
@@ -59,25 +59,23 @@ func set_camera_direction()-> void:
 	head.rotation_degrees.x = look_rotation.x
 	rotation_degrees.y = look_rotation.y
 
-func shoot()-> void:
-	var space_state = camera.get_world_3d().direct_space_state
-	var screen_center = get_viewport().size / 2
-	var origin = camera.project_ray_origin(screen_center)
-	var end_point = origin + camera.project_ray_normal(screen_center) * ray_range
-	var query = PhysicsRayQueryParameters3D.create(origin, end_point)
-	query.collide_with_bodies = true
-	var targetDict: Dictionary = space_state.intersect_ray(query)
+func attack()-> void:
+	can_shoot = false
+	attack_cooldown.start(weapon.get_cooldown())
+	var targetDict: Dictionary = weapon.attack(camera)
 	var target:Node3D = targetDict.get("collider")
-	if target != null:
-		print(target.is_in_group("enemy"))
+	if target != null: # && target.is_in_group("enemy")
+		print("you hit an enemy!")
 	else:
-		print ("yabadabadoo")
+		print ("yabadabadoo!")
+	
+	
 func _input(event):
 	
 	#shooting input
-	if Input.is_action_just_pressed("shoot") && can_shoot:
-		shoot()
-		
+	if Input.is_action_just_pressed("attack") && can_shoot:
+		attack()
+
 	#looking around
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -88,3 +86,7 @@ func _input(event):
 			look_rotation.y -= (event.relative.x * sensitivity)
 			look_rotation.x -= (event.relative.y * sensitivity)
 			look_rotation.x = clamp(look_rotation.x, minimum_angle, maximum_angle)
+
+
+func _on_weapon_cooldown_timeout() -> void:
+	can_shoot = true

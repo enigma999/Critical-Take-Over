@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://7qwurcgndv8l"]
+[gd_scene load_steps=5 format=3 uid="uid://7qwurcgndv8l"]
+
+[ext_resource type="Script" path="res://scenes/items/weapon_behaviour.gd" id="1_r3bc3"]
+[ext_resource type="Script" path="res://scenes/items/specific_weapon_behaviour.gd" id="2_dgriq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_5x456"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_tkram"]
 
 [node name="Weapon" type="Node3D"]
+script = ExtResource("1_r3bc3")
 
 [node name="Weapon body" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 1.5, 0, 0, 0)
@@ -14,5 +18,5 @@ mesh = SubResource("BoxMesh_5x456")
 transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, -0.771367)
 mesh = SubResource("BoxMesh_tkram")
 
-[node name="Bullet origin" type="Marker3D" parent="Muzzle"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.522442)
+[node name="specific_weapon_behaviour" type="Node" parent="."]
+script = ExtResource("2_dgriq")

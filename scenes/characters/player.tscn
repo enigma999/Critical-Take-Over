@@ -25,3 +25,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 
 [node name="Weapon" parent="." instance=ExtResource("2_wg1r8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.528489, 0.403356, -0.0188934)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Weapon"]
+
+[node name="WeaponCooldown" type="Timer" parent="."]
+
+[connection signal="timeout" from="WeaponCooldown" to="." method="_on_weapon_cooldown_timeout"]
