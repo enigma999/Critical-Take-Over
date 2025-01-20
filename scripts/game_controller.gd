@@ -22,8 +22,5 @@ func _process(delta: float) -> void:
 func UpdateUi() -> void:
 	UI.SetBleedBar(bleedValue)
 
-func _on_player_kill_made() -> void:
-	if bleedMax > (bleedValue + 40):
-		bleedValue = bleedValue + 40
-	else:
-		bleedValue = bleedMax
+func _on_player_take_over() -> void:
+	bleedValue = bleedMax

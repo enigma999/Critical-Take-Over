@@ -17,7 +17,7 @@ const GRAVITY_FORCE: float = 10.0
 @onready var head = $Head
 var look_rotation: Vector2
 
-signal kill_made
+signal take_over
 
 func _physics_process(delta: float) -> void:
 	gravity(delta)
