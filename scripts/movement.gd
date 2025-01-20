@@ -15,16 +15,11 @@ const GRAVITY_FORCE: float = 10.0
 @export var maximum_angle:float = 90
 
 @onready var head = $Head
-@onready var Game = $"../.."
 var look_rotation: Vector2
 
 signal kill_made
 
 func _physics_process(delta: float) -> void:
-	#todo remove
-	if Input.is_action_just_pressed("ui_accept"):
-		print("hit baby")
-		kill_made.emit()
 	gravity(delta)
 	handle_movement(delta)
 	move_and_slide()

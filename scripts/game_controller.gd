@@ -13,9 +13,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	bleedValue = bleedValue - (bleedStep * delta);
-	pass
-	
+	if bleedValue > 1:
+		bleedValue = bleedValue - (bleedStep * delta);
+
 func _process(delta: float) -> void:
 	UpdateUi()
 
