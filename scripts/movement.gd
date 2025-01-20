@@ -18,20 +18,15 @@ const GRAVITY_FORCE: float = 10.0
 @onready var head = $Head
 var look_rotation: Vector2
 
-#shooting variables
+#attacking variables
 @onready var camera = $Head/Camera3D
-var can_shoot: bool = true
-var ray_range: float = 2000.0
+var can_attack: bool = true
 @onready var weapon: Node3D = $Weapon
 @onready var attack_cooldown: Timer = $WeaponCooldown
 
 
 
 func _physics_process(delta: float) -> void:
-	
-	#shooting stuff will seperate into functions later :D
-
-		
 	gravity(delta)
 	handle_movement(delta)
 	move_and_slide()
@@ -60,20 +55,20 @@ func set_camera_direction()-> void:
 	rotation_degrees.y = look_rotation.y
 
 func attack()-> void:
-	can_shoot = false
+	can_attack = false
 	attack_cooldown.start(weapon.get_cooldown())
 	var targetDict: Dictionary = weapon.attack(camera)
 	var target:Node3D = targetDict.get("collider")
 	if target != null: # && target.is_in_group("enemy")
-		print("you hit an enemy!")
+		print("you hit an enemy!") #hier komt het aanroepen van het overnemen van een lichaam denk ik
 	else:
 		print ("yabadabadoo!")
 	
 	
 func _input(event):
 	
-	#shooting input
-	if Input.is_action_just_pressed("attack") && can_shoot:
+	#attacking input
+	if Input.is_action_just_pressed("attack") && can_attack:
 		attack()
 
 	#looking around
@@ -89,4 +84,4 @@ func _input(event):
 
 
 func _on_weapon_cooldown_timeout() -> void:
-	can_shoot = true
+	can_attack = true
