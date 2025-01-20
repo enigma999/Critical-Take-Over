@@ -1,6 +1,25 @@
-[gd_scene format=3 uid="uid://ryqfpwfl7coq"]
+[gd_scene load_steps=3 format=3 uid="uid://ryqfpwfl7coq"]
+
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_8ocy4"]
+
+[sub_resource type="GDScript" id="GDScript_kfn0q"]
+script/source = "extends ProgressBar
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta: float) -> void:
+	value = value - step;
+	
+func Add(amount: int)->void:
+	value = value + amount;
+"
 
 [node name="UI" type="CanvasLayer"]
+script = ExtResource("1_8ocy4")
 
 [node name="top center" type="HBoxContainer" parent="."]
 anchors_preset = 10
@@ -8,9 +27,10 @@ anchor_right = 1.0
 offset_bottom = 27.0
 grow_horizontal = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="top center"]
+[node name="Bleed Bar" type="ProgressBar" parent="top center"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 6
-step = 1.0
-rounded = true
+step = 0.1
+value = 100.0
+script = SubResource("GDScript_kfn0q")
