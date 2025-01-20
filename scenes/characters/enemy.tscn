@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcj7wv5s7lqvk"]
+[gd_scene load_steps=5 format=3 uid="uid://bcj7wv5s7lqvk"]
 
 [ext_resource type="Material" uid="uid://km3xals54lid" path="res://assets/materials/mat_enemy.tres" id="1_lviba"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_xas03"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6j7de"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4mtq7"]
 
 [node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_xas03")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
