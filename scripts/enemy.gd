@@ -2,12 +2,13 @@ extends CharacterBody3D
 
 @export var health: float = 100
 @export var move_around: bool = false
-@export var speed: float = 5.0
+@export var speed: float = 2.0
 
+# Below are variables and functionality for moving enemies (for testing)
 var relative_points: Array[Vector3] = [
 	Vector3(0, 0, 0), 
-	Vector3(2, 0, 0), 
-	Vector3(-1, 0, 2)
+	Vector3(3, 0, 0), 
+	Vector3(-2, 0, 2)
 ]
 var spawn_position: Vector3 = Vector3.ZERO
 var absolute_points: Array[Vector3] = []
