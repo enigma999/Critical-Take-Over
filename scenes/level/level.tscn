@@ -1,3 +1,39 @@
-[gd_scene format=3 uid="uid://bil6dg3lnhtda"]
+[gd_scene load_steps=4 format=3 uid="uid://bil6dg3lnhtda"]
 
-[node name="level" type="Node3D"]
+[ext_resource type="PackedScene" uid="uid://cmy4ipo3l2icr" path="res://scenes/level/level assets/floor.tscn" id="1_27qyf"]
+[ext_resource type="PackedScene" uid="uid://clvcy6yegkicu" path="res://scenes/level/level assets/wall.tscn" id="2_hkm5x"]
+[ext_resource type="PackedScene" uid="uid://bh82j7rv2rx6u" path="res://scenes/level/level assets/wall_with_window.tscn" id="3_eytj1"]
+
+[node name="Level" type="Node3D"]
+
+[node name="Floor" parent="." instance=ExtResource("1_27qyf")]
+
+[node name="Wall" parent="Floor" instance=ExtResource("2_hkm5x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2.5)
+
+[node name="Wall2" parent="Floor" instance=ExtResource("2_hkm5x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2.5)
+
+[node name="Floor2" parent="." instance=ExtResource("1_27qyf")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10, 0, 15)
+
+[node name="Wall" parent="Floor2" instance=ExtResource("2_hkm5x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2.5)
+
+[node name="Wall2" parent="Floor2" instance=ExtResource("2_hkm5x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2.5)
+
+[node name="Floor3" parent="." instance=ExtResource("1_27qyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 15)
+
+[node name="WallWithWindow" parent="Floor3" instance=ExtResource("3_eytj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
+
+[node name="WallWithWindow2" parent="Floor3" instance=ExtResource("3_eytj1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -2.5)
+
+[node name="WallWithWindow3" parent="Floor3" instance=ExtResource("3_eytj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 0)
+
+[node name="WallWithWindow4" parent="Floor3" instance=ExtResource("3_eytj1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 2.5)
