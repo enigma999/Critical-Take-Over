@@ -1,9 +1,10 @@
 extends Node
 
 @onready var UI = $UI
-var bleedStep: float = 1
+@export var bleedStep: float = 1
+@export var bleedMax: float = 100
 var bleedValue: float
-var bleedMax: float = 100
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
