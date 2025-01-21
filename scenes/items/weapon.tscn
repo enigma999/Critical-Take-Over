@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://7qwurcgndv8l"]
 
-[ext_resource type="Script" path="res://scenes/items/weapon_behaviour.gd" id="1_r3bc3"]
-[ext_resource type="Script" path="res://scenes/items/specific_weapon_behaviour.gd" id="2_dgriq"]
+[ext_resource type="Script" path="res://scripts/weapon_scripts/weapon_behaviour.gd" id="1_r3bc3"]
+[ext_resource type="Script" path="res://scripts/weapon_scripts/specific_weapon_behaviour.gd" id="2_dgriq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_5x456"]
 
