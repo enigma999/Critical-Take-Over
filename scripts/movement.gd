@@ -18,13 +18,12 @@ const GRAVITY_FORCE: float = 10.0
 @onready var head = $Head
 var look_rotation: Vector2
 
+signal take_over
 #attacking variables
 @onready var camera = $Head/Camera3D
 var can_attack: bool = true
 @onready var weapon: Node3D = $Weapon
 @onready var attack_cooldown: Timer = $WeaponCooldown
-
-
 
 func _physics_process(delta: float) -> void:
 	gravity(delta)
@@ -59,10 +58,8 @@ func attack()-> void:
 	attack_cooldown.start(weapon.get_cooldown())
 	var targetDict: Dictionary = weapon.attack(camera)
 	var target:Node3D = targetDict.get("collider")
-	if target != null: # && target.is_in_group("enemy")
-		print("you hit an enemy!") #hier komt het aanroepen van het overnemen van een lichaam denk ik
-	else:
-		print ("yabadabadoo!")
+	if target != null && target.is_in_group("enemy"):
+		take_over.emit()
 	
 	
 func _input(event):
