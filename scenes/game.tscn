@@ -42,3 +42,5 @@ move_around = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+
+[connection signal="take_over" from="Characters/Player" to="." method="_on_player_take_over"]
