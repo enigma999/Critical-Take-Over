@@ -1,5 +1,6 @@
 extends Node
 
+@onready var timer: Timer = $Timer
 @onready var UI = $UI
 @export var bleedStep: float = 1
 @export var bleedMax: float = 100
@@ -16,6 +17,7 @@ func _physics_process(delta: float) -> void:
 	if bleedValue > 0:
 		bleedValue = bleedValue - (bleedStep * delta);
 
+
 func _process(delta: float) -> void:
 	UpdateUi()
 
@@ -24,3 +26,5 @@ func UpdateUi() -> void:
 
 func _on_player_take_over() -> void:
 	bleedValue = bleedMax
+	if (timer.is_stopped()):
+		timer.start()

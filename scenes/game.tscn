@@ -22,6 +22,9 @@ tonemap_mode = 2
 script = ExtResource("1_ypfg4")
 bleedStep = 10.0
 
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7f3rj")
 
