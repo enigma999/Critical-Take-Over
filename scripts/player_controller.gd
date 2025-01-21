@@ -18,11 +18,13 @@ const GRAVITY_FORCE: float = 10.0
 @onready var head: Node3D = $Head
 var look_rotation: Vector2
 
+signal take_over
 #attacking variables
 @onready var camera = $Head/Camera3D
 var can_attack: bool = true
 @onready var weapon: Node3D = $Weapon
 @onready var attack_cooldown: Timer = $WeaponCooldown
+
 
 func init_new_character() -> void:
 	if get_tree().get_nodes_in_group("enemy").size() <= 1:
@@ -80,6 +82,8 @@ func take_over(target: Node3D)-> void:
 	die()
 	set_script(null)
 	target.init_new_character()
+	take_over.emit()
+
 	
 
 func die()-> void:
