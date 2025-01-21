@@ -32,11 +32,23 @@ environment = SubResource("Environment_7f3rj")
 [node name="Level" parent="World" instance=ExtResource("1_ovxki")]
 
 [node name="Characters" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.40852, -3.9357)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 0)
 
 [node name="Player" parent="Characters" instance=ExtResource("3_ywkr7")]
 
 [node name="Enemy" parent="Characters" instance=ExtResource("4_0pygn")]
+move_around = true
+
+[node name="Enemy2" parent="Characters" instance=ExtResource("4_0pygn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 7)
+move_around = true
+
+[node name="Enemy3" parent="Characters" instance=ExtResource("4_0pygn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 2)
+move_around = true
+
+[node name="Enemy4" parent="Characters" instance=ExtResource("4_0pygn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
 move_around = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

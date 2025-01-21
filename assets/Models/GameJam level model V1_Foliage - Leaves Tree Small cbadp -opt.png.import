@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx7b762obc70x"
+uid="uid://cjvf1ps6xwtkd"
 path.s3tc="res://.godot/imported/GameJam level model V1_Foliage - Leaves Tree Small cbadp -opt.png-49874fa4c5157c06d4d6f03e1c3e7b87.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "7dc07b3d91b365bc41da4e142026207e"
 }
 
 [deps]
