@@ -3,6 +3,7 @@
 [sub_resource type="BoxMesh" id="BoxMesh_068fl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vqu0v"]
+size = Vector3(0.5, 2, 5)
 
 [node name="wall" type="StaticBody3D"]
 
@@ -11,5 +12,5 @@ transform = Transform3D(0.5, 0, 0, 0, 2, 0, 0, 0, 5, 0, 1, 0)
 mesh = SubResource("BoxMesh_068fl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 2, 0, 0, 0, 5, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_vqu0v")

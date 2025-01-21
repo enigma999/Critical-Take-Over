@@ -1,26 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://btg0t21c6pq3t"]
+[gd_scene load_steps=5 format=3 uid="uid://btg0t21c6pq3t"]
 
 [ext_resource type="PackedScene" uid="uid://ryqfpwfl7coq" path="res://scenes/ui/ui.tscn" id="1_l1k2k"]
 [ext_resource type="PackedScene" uid="uid://bil6dg3lnhtda" path="res://scenes/level/level.tscn" id="1_ovxki"]
 [ext_resource type="PackedScene" uid="uid://clex4vyjuy3py" path="res://scenes/characters/player.tscn" id="3_ywkr7"]
 [ext_resource type="PackedScene" uid="uid://bcj7wv5s7lqvk" path="res://scenes/characters/enemy.tscn" id="4_0pygn"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dtuvo"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_eucx6"]
-sky_material = SubResource("ProceduralSkyMaterial_dtuvo")
-
-[sub_resource type="Environment" id="Environment_7f3rj"]
-background_mode = 2
-sky = SubResource("Sky_eucx6")
-tonemap_mode = 2
-
 [node name="Game" type="Node"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_7f3rj")
 
 [node name="UI" parent="." instance=ExtResource("1_l1k2k")]
 
@@ -32,10 +17,14 @@ environment = SubResource("Environment_7f3rj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 
 [node name="Player" parent="Characters" instance=ExtResource("3_ywkr7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Enemy" parent="Characters" instance=ExtResource("4_0pygn")]
+health = null
 move_around = true
+speed = null
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 13)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+transform = Transform3D(1, 0, 0, 0, 0.129869, 0.991531, 0, -0.991531, 0.129869, 0, 9.76532, 0)
