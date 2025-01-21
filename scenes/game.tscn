@@ -44,6 +44,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.16544, 1.5, 15.4714)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0324707, -0.00137329, -0.0030117)
 move_around = true
 
+[node name="Enemy3" parent="Characters" instance=ExtResource("4_0pygn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0110426, -3.89248, -1.33756)
+move_around = true
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
 

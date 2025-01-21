@@ -20,7 +20,6 @@ mesh = SubResource("CapsuleMesh_tj5qu")
 shape = SubResource("ConvexPolygonShape3D_8ygj2")
 
 [node name="Head" parent="." instance=ExtResource("2_1l2nh")]
-script = null
 
 [node name="Weapon" parent="." instance=ExtResource("2_wg1r8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.528489, 0.403356, -0.0188934)
