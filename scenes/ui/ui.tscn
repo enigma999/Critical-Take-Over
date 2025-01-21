@@ -63,7 +63,7 @@ script = SubResource("GDScript_kfn0q")
 [node name="TimerLabel" type="Label" parent="top center/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "06:22"
+text = "00:00"
 horizontal_alignment = 2
 script = ExtResource("2_kpfcx")
 

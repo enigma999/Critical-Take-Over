@@ -6,7 +6,7 @@ extends Node
 var timer_running: bool = false
 var timer_start: int = 0
 var bleedValue: float
-
+signal BeeldOut
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,6 +17,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if bleedValue > 0:
 		bleedValue = bleedValue - (bleedStep * delta);
+	else:
+		BeeldOut.emit()
 
 
 func _process(delta: float) -> void:
