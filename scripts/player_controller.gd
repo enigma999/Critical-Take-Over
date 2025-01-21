@@ -72,17 +72,18 @@ func attack()-> void:
 	var targetDict: Dictionary = weapon.attack(camera)
 	var target:Node3D = targetDict.get("collider")
 	if target != null && target.is_in_group("enemy"):
-		take_over(target)
+		take_over_enemy(target)
 
-func take_over(target: Node3D)-> void:
+func take_over_enemy(target: Node3D)-> void:
 	remove_child(head)
 	target.add_child(head)
 	head.set_owner(target)
 	target.set_script(load("res://scripts/player_controller.gd"))
 	die()
+	take_over.emit()
 	set_script(null)
 	target.init_new_character()
-	take_over.emit()
+
 
 	
 
