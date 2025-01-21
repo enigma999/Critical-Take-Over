@@ -1,9 +1,10 @@
 extends Node
 
-@onready var timer: Timer = $Timer
 @onready var UI = $UI
 @export var bleedStep: float = 1
 @export var bleedMax: float = 100
+var timer_running: bool = false
+var timer_start: int = 0
 var bleedValue: float
 
 
@@ -23,8 +24,12 @@ func _process(delta: float) -> void:
 
 func UpdateUi() -> void:
 	UI.SetBleedBar(bleedValue)
+	if timer_running:
+		UI.SetTimer(Time.get_unix_time_from_system() -timer_start)
+
 
 func _on_player_take_over() -> void:
 	bleedValue = bleedMax
-	if (timer.is_stopped()):
-		timer.start()
+	if !timer_running:
+		timer_running = true
+		timer_start = Time.get_unix_time_from_system()

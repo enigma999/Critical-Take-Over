@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ryqfpwfl7coq"]
+[gd_scene load_steps=6 format=3 uid="uid://ryqfpwfl7coq"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_8ocy4"]
+[ext_resource type="Script" path="res://scenes/ui/timer_label.gd" id="2_kpfcx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1jwr"]
 bg_color = Color(0.162066, 0.162066, 0.162065, 1)
@@ -39,7 +40,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="Bleed Bar" type="ProgressBar" parent="top center"]
+[node name="VBoxContainer" type="VBoxContainer" parent="top center"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="top center/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Bleed Bar" type="ProgressBar" parent="top center/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -50,15 +60,16 @@ value = 100.0
 show_percentage = false
 script = SubResource("GDScript_kfn0q")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TimerLabel" type="Label" parent="top center/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "06:22"
+horizontal_alignment = 2
+script = ExtResource("2_kpfcx")
+
+[node name="ColorRect" type="ColorRect" parent="top center/VBoxContainer"]
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
 color = Color(1, 0, 0, 1)
