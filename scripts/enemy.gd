@@ -17,7 +17,7 @@ var current_point: int = 0
 func _ready():
 	_setup_movement_points()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if !move_around or absolute_points.size() < 2:
 		return
 

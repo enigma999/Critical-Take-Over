@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://pdiets2gpndu"]
+
+[sub_resource type="GDScript" id="GDScript_7vbis"]
+script/source = "extends Node3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	print(\"hoofd gegeven\")
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	pass
+"
+
+[node name="Head" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+script = SubResource("GDScript_7vbis")
+
+[node name="Camera3D" type="Camera3D" parent="."]
