@@ -23,5 +23,4 @@ func UpdateUi() -> void:
 	UI.SetBleedBar(bleedValue)
 
 func _on_player_take_over() -> void:
-	print("trigger")
 	bleedValue = bleedMax

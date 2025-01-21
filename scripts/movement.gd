@@ -60,9 +60,6 @@ func attack()-> void:
 	var target:Node3D = targetDict.get("collider")
 	if target != null && target.is_in_group("enemy"):
 		take_over.emit()
-		print("you hit an enemy!") #hier komt het aanroepen van het overnemen van een lichaam denk ik
-	else:
-		print ("yabadabadoo!")
 	
 	
 func _input(event):
