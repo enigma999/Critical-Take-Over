@@ -1,11 +1,12 @@
 extends CharacterBody3D
 
-
+#movement consts
 const SPEED: float = 8.0
 const ACCELERATION: float = 12.0
 const JUMP_VELOCITY: float = 4.5
 const GRAVITY_FORCE: float = 10.0
 
+#movement variables
 #puur @export toegevoegd voor het tweaken enzo
 @export var current_speed: float = SPEED
 @export var acceleration: float = ACCELERATION
@@ -15,8 +16,15 @@ const GRAVITY_FORCE: float = 10.0
 @export var maximum_angle:float = 90
 
 @onready var head = $Head
-
 var look_rotation: Vector2
+
+#attacking variables
+@onready var camera = $Head/Camera3D
+var can_attack: bool = true
+@onready var weapon: Node3D = $Weapon
+@onready var attack_cooldown: Timer = $WeaponCooldown
+
+
 
 func _physics_process(delta: float) -> void:
 	gravity(delta)
@@ -46,7 +54,24 @@ func set_camera_direction()-> void:
 	head.rotation_degrees.x = look_rotation.x
 	rotation_degrees.y = look_rotation.y
 
+func attack()-> void:
+	can_attack = false
+	attack_cooldown.start(weapon.get_cooldown())
+	var targetDict: Dictionary = weapon.attack(camera)
+	var target:Node3D = targetDict.get("collider")
+	if target != null: # && target.is_in_group("enemy")
+		print("you hit an enemy!") #hier komt het aanroepen van het overnemen van een lichaam denk ik
+	else:
+		print ("yabadabadoo!")
+	
+	
 func _input(event):
+	
+	#attacking input
+	if Input.is_action_just_pressed("attack") && can_attack:
+		attack()
+
+	#looking around
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	elif event.is_action_pressed("ui_cancel"):
@@ -56,3 +81,7 @@ func _input(event):
 			look_rotation.y -= (event.relative.x * sensitivity)
 			look_rotation.x -= (event.relative.y * sensitivity)
 			look_rotation.x = clamp(look_rotation.x, minimum_angle, maximum_angle)
+
+
+func _on_weapon_cooldown_timeout() -> void:
+	can_attack = true
