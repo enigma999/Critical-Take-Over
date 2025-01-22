@@ -26,7 +26,7 @@ shape = SubResource("CapsuleShape3D_4mtq7")
 [node name="Head" parent="." instance=ExtResource("3_tdg7m")]
 
 [node name="Weapon" parent="Head" instance=ExtResource("3_mu5ft")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.505315, 0.33819, 0.468191)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264068, 0.0509503, -0.467221)
 
 [node name="WeaponCooldown" type="Timer" parent="."]
 

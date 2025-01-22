@@ -87,6 +87,7 @@ func _setup_movement_points():
 
 
 func init_new_character() -> void:
+	get_node("Weapon").queue_free()
 	head = get_node("Head")
 	camera = get_node("Head/Camera3D")
 	weapon = get_node("Head/Weapon")
