@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://ryqfpwfl7coq" path="res://scenes/ui/ui.tscn" id="1_l1k2k"]
 [ext_resource type="PackedScene" uid="uid://bil6dg3lnhtda" path="res://scenes/level/level.tscn" id="1_ovxki"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_ypfg4"]
-[ext_resource type="PackedScene" uid="uid://clex4vyjuy3py" path="res://scenes/characters/player.tscn" id="3_ywkr7"]
 [ext_resource type="PackedScene" uid="uid://bcj7wv5s7lqvk" path="res://scenes/characters/enemy.tscn" id="4_0pygn"]
+[ext_resource type="PackedScene" uid="uid://ctg7g7kbk4740" path="res://scenes/characters/virus.tscn" id="4_xoqvr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dtuvo"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -34,11 +34,11 @@ environment = SubResource("Environment_7f3rj")
 [node name="Characters" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.40852, -3.9357)
 
+[node name="Virus" parent="Characters" instance=ExtResource("4_xoqvr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.07215, 0, 15.2861)
+
 [node name="Enemy2" parent="Characters" instance=ExtResource("4_0pygn")]
 transform = Transform3D(-0.755888, 0, 0.654701, 0, 1, 0, -0.654701, 0, -0.755888, 11.7648, 2.38419e-07, 13.9578)
-
-[node name="Player" parent="Characters" instance=ExtResource("3_ywkr7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.16544, 1.5, 15.4714)
 
 [node name="Enemy" parent="Characters" instance=ExtResource("4_0pygn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0324707, -0.00137329, -0.0030117)
@@ -51,4 +51,7 @@ move_around = true
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
 
-[connection signal="take_over" from="Characters/Player" to="." method="_on_player_take_over"]
+[connection signal="take_over" from="Characters/Virus" to="." method="_on_take_over"]
+[connection signal="take_over" from="Characters/Enemy2" to="." method="_on_take_over"]
+[connection signal="take_over" from="Characters/Enemy" to="." method="_on_take_over"]
+[connection signal="take_over" from="Characters/Enemy3" to="." method="_on_take_over"]

@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctg7g7kbk4740"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_6mlgi"]
+[ext_resource type="Material" uid="uid://km3xals54lid" path="res://assets/materials/mat_enemy.tres" id="2_ix783"]
+[ext_resource type="PackedScene" uid="uid://7qwurcgndv8l" path="res://scenes/items/weapon.tscn" id="3_mu5ft"]
+[ext_resource type="PackedScene" uid="uid://pdiets2gpndu" path="res://scenes/characters/head.tscn" id="3_tdg7m"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6j7de"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4mtq7"]
+
+[node name="Virus" type="CharacterBody3D" groups=["enemy"]]
+script = ExtResource("1_6mlgi")
+metadata/Head_Height = 1.2
+metadata/is_player = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = ExtResource("2_ix783")
+mesh = SubResource("CapsuleMesh_6j7de")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_4mtq7")
+
+[node name="Head" parent="." instance=ExtResource("3_tdg7m")]
+
+[node name="Weapon" parent="Head" instance=ExtResource("3_mu5ft")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.505315, 0.33819, 0.468191)
+
+[node name="WeaponCooldown" type="Timer" parent="."]
+
+[connection signal="timeout" from="WeaponCooldown" to="." method="_on_weapon_cooldown_timeout"]

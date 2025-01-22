@@ -11,6 +11,10 @@
 [node name="Enemy" type="CharacterBody3D" groups=["enemy"]]
 script = ExtResource("1_xas03")
 metadata/Head_Height = 1.2
+metadata/is_player = false
+
+[node name="Weapon" parent="." instance=ExtResource("3_mbkfo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.749835, -0.625029)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -20,9 +24,6 @@ mesh = SubResource("CapsuleMesh_6j7de")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_4mtq7")
-
-[node name="Weapon" parent="." instance=ExtResource("3_mbkfo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.505315, 1.13819, 0.468191)
 
 [node name="WeaponCooldown" type="Timer" parent="."]
 

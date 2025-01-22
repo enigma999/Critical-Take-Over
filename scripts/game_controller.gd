@@ -22,5 +22,5 @@ func _process(delta: float) -> void:
 func UpdateUi() -> void:
 	UI.SetBleedBar(bleedValue)
 
-func _on_player_take_over() -> void:
+func _on_take_over() -> void:
 	bleedValue = bleedMax
