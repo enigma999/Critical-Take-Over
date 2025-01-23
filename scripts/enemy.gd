@@ -23,13 +23,12 @@ const JUMP_VELOCITY: float = 7
 const GRAVITY_FORCE: float = 18
 
 #movement variables
-#puur @export toegevoegd voor het tweaken enzo
-@export var current_speed: float = SPEED
-@export var acceleration: float = ACCELERATION
-@export var gravity_force:float = GRAVITY_FORCE
-@export var sensitivity:float  = 0.1
-@export var minimum_angle:float = -80
-@export var maximum_angle:float = 90
+var current_speed: float = SPEED
+var acceleration: float = ACCELERATION
+var gravity_force:float = GRAVITY_FORCE
+var sensitivity:float  = 0.1
+var minimum_angle:float = -80
+var maximum_angle:float = 90
 
 var head: Node3D
 var look_rotation: Vector2
@@ -87,7 +86,6 @@ func _setup_movement_points():
 	if absolute_points.size() >= 1:
 		current_point = 0
 		
-
 
 func init_new_character() -> void:
 	get_node("Head/Weapon").free()

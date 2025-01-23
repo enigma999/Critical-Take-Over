@@ -34,9 +34,6 @@ environment = SubResource("Environment_7f3rj")
 [node name="Characters" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.40852, -3.9357)
 
-[node name="Virus" parent="Characters" instance=ExtResource("4_xoqvr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.07215, 0, 15.2861)
-
 [node name="Enemy2" parent="Characters" instance=ExtResource("4_0pygn")]
 transform = Transform3D(-0.755888, 0, 0.654701, 0, 1, 0, -0.654701, 0, -0.755888, 11.7648, 2.38419e-07, 13.9578)
 
@@ -48,10 +45,11 @@ move_around = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0110426, -3.89248, -1.33756)
 move_around = true
 
+[node name="Virus" parent="Characters" instance=ExtResource("4_xoqvr")]
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
 
-[connection signal="take_over" from="Characters/Virus" to="." method="_on_take_over"]
 [connection signal="take_over" from="Characters/Enemy2" to="." method="_on_take_over"]
 [connection signal="take_over" from="Characters/Enemy" to="." method="_on_take_over"]
 [connection signal="take_over" from="Characters/Enemy3" to="." method="_on_take_over"]
