@@ -19,8 +19,8 @@ var current_point: int = 0
 #movement consts
 const SPEED: float = 8.0
 const ACCELERATION: float = 12.0
-const JUMP_VELOCITY: float = 4.5
-const GRAVITY_FORCE: float = 10.0
+const JUMP_VELOCITY: float = 7
+const GRAVITY_FORCE: float = 18
 
 #movement variables
 #puur @export toegevoegd voor het tweaken enzo
@@ -58,10 +58,13 @@ func _ready():
 		weapon = $Weapon
 
 func _physics_process(delta: float) -> void:
+	gravity(delta)
+
 	if is_taken:
 		player_movement(delta)
 	elif !is_dead:
 		ai_movement()
+	move_and_slide()
 	
 func ai_movement()-> void:
 	if !move_around or absolute_points.size() < 2:
@@ -111,9 +114,7 @@ func take_over_enemy(target: Node3D)-> void:
 	set_script(null)
 
 func player_movement(delta: float) -> void:
-	gravity(delta)
 	handle_movement(delta)
-	move_and_slide()
 	set_camera_direction()
 	
 func gravity(delta: float)-> void:
@@ -123,15 +124,19 @@ func gravity(delta: float)-> void:
 func handle_movement(delta: float)-> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+	
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-
-	if direction:
-		velocity.x = lerp(velocity.x, direction.x * current_speed, acceleration * delta)
-		velocity.z = lerp(velocity.z, direction.z * current_speed, acceleration * delta)
+	if is_on_floor():
+		if direction:
+			velocity.x = lerp(velocity.x, direction.x * current_speed, acceleration * delta)
+			velocity.z = lerp(velocity.z, direction.z * current_speed, acceleration * delta)
+		else:
+			velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
+			velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
 	else:
-		velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
-		velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
+		velocity.x = lerp(velocity.x, direction.x * current_speed, 2 * delta)
+		velocity.z = lerp(velocity.z, direction.z * current_speed, 2 * delta)
 
 func set_camera_direction()-> void:
 	head.rotation_degrees.x = look_rotation.x

@@ -1,9 +1,16 @@
 extends Node3D
 
-@onready var specific_weapon_behaviour_node = $specific_weapon_behaviour
+var ray_range = 5000
+var cooldown = 0.5
 
 func attack(camera: Camera3D)-> Dictionary:
-	return specific_weapon_behaviour_node.shoot(camera)
+	var space_state = camera.get_world_3d().direct_space_state
+	var screen_center = get_viewport().size / 2
+	var origin = camera.project_ray_origin(screen_center)
+	var end_point = origin + camera.project_ray_normal(screen_center) * ray_range
+	var query = PhysicsRayQueryParameters3D.create(origin, end_point)
+	query.collide_with_bodies = true
+	return space_state.intersect_ray(query)
 	
 func get_cooldown()-> float:
-	return specific_weapon_behaviour_node.cooldown
+	return cooldown
