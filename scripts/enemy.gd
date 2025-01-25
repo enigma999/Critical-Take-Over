@@ -153,7 +153,6 @@ func handle_movement(delta: float)-> void:
 		input_dir = Input.get_vector("left", "right", "forward", "backward")
 		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
-	var slide_direction: Vector3
 	if Input.is_action_just_pressed("slide") && is_on_floor() && can_slide:
 		slide_timer.start()
 		is_sliding = true
