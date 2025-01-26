@@ -21,14 +21,24 @@ const SPEED: float = 8.0
 const ACCELERATION: float = 12.0
 const JUMP_VELOCITY: float = 7
 const GRAVITY_FORCE: float = 18
+const SLIDE_FORCE: float = 15
+const SLIDE_DURATION: float = 0.3
 
 #movement variables
 var current_speed: float = SPEED
 var acceleration: float = ACCELERATION
 var gravity_force:float = GRAVITY_FORCE
+
 var sensitivity:float  = 0.1
 var minimum_angle:float = -80
 var maximum_angle:float = 90
+
+var is_sliding: bool = false
+var can_slide: bool = true
+var slide_force: float = 0
+var slide_timer: Timer
+var slide_cooldown_timer: Timer
+
 
 var head: Node3D
 var look_rotation: Vector2
@@ -46,7 +56,7 @@ var weapon: Node3D
 func _ready():
 	is_taken = get_meta("is_player")
 	_setup_movement_points()
-	
+	init_slide_timers()
 	if is_taken:
 		head = $Head
 		camera = $Head/Camera3D
@@ -97,7 +107,20 @@ func init_new_character() -> void:
 	can_attack = true
 	head.position.y = get_meta("Head_Height")
 	set_process_input(true)
+
+func init_slide_timers()-> void:
+	slide_timer = Timer.new()
+	slide_timer.set_wait_time(SLIDE_DURATION)
+	slide_timer.one_shot = true
+	slide_timer.connect("timeout", _on_slide_timer_timeout)
 	
+	slide_cooldown_timer = Timer.new()
+	slide_cooldown_timer.set_wait_time(0.75)
+	slide_cooldown_timer.one_shot = true
+	slide_cooldown_timer.connect("timeout", _on_slide_cooldown_timer_timeout)
+	add_child(slide_cooldown_timer)
+	add_child(slide_timer)
+
 func take_over_enemy(target: Node3D)-> void:
 	is_dead = true
 	is_taken = false
@@ -119,13 +142,28 @@ func gravity(delta: float)-> void:
 	if not is_on_floor():
 		velocity.y -= gravity_force * delta
 
+var input_dir: Vector2
+var direction: Vector3
+
 func handle_movement(delta: float)-> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-	
-	var input_dir := Input.get_vector("left", "right", "forward", "backward")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if is_on_floor():
+
+	if !is_sliding:
+		input_dir = Input.get_vector("left", "right", "forward", "backward")
+		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
+	if Input.is_action_just_pressed("slide") && is_on_floor() && can_slide:
+		slide_timer.start()
+		is_sliding = true
+		can_slide = false
+		slide_force = SLIDE_FORCE
+
+	if is_sliding:
+		velocity = slide_force * direction
+		scale.y = 0.5
+
+	elif is_on_floor():
 		if direction:
 			velocity.x = lerp(velocity.x, direction.x * current_speed, acceleration * delta)
 			velocity.z = lerp(velocity.z, direction.z * current_speed, acceleration * delta)
@@ -148,7 +186,6 @@ func attack()-> void:
 	if target != null && target.is_in_group("enemy"):
 		take_over_enemy(target)
 
-
 func die()-> void:
 	remove_from_group("enemy")
 	#attach death script that makes it so the body lies on the ground :D
@@ -159,6 +196,7 @@ func _input(event):
 	#attacking input
 	if Input.is_action_just_pressed("attack") && can_attack:
 		attack()
+
 	#looking around
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -172,3 +210,11 @@ func _input(event):
 
 func _on_weapon_cooldown_timeout() -> void:
 	can_attack = true
+
+func _on_slide_timer_timeout()-> void :
+	is_sliding = false
+	scale.y = 1
+	slide_cooldown_timer.start()
+
+func _on_slide_cooldown_timer_timeout()-> void:
+	can_slide = true
